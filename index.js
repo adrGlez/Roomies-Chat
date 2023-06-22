@@ -1,9 +1,12 @@
 const http = require("http");
 const server = http.createServer();
+const PORT = process.env.PORT
 
 const io = require("socket.io")(server, {
   cors: { origin: "*" },
 });
+
+server.listen(PORT);
 
 io.on("connection", (socket) => {
   console.log("Client connected");
@@ -17,5 +20,3 @@ io.on("connection", (socket) => {
     io.emit("chat_message", data);
   });
 });
-
-server.listen();
